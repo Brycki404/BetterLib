@@ -31,7 +31,8 @@ if BetterLib.FirstRun then
     _G.loadstring = BetterLib.loadstring
 
     --// Better Get
-    function BetterLib.Get(url: string): any
+    function BetterLib.Get(url)
+        print(url, type(url), typeof(url))
         assert(type(string) == "string", "[Error] Get: First Argument needs to be a string!")
 
         if BetterLib.GetCaching[string] == nil then
