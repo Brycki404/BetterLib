@@ -1,5 +1,5 @@
-if _G.Lib == nil then
-    _G.Lib = {
+if _G.BetterLib == nil then
+    _G.BetterLib = {
         FirstRun = nil;
         --// Hook Storage
         LoadstringCaching = {};
@@ -7,33 +7,33 @@ if _G.Lib == nil then
         OldLoadstring = loadstring;
     }
 end
-local Lib = _G.Lib
+local BetterLib = _G.BetterLib
 
 --// First Run
-if Lib.FirstRun == nil then
-    Lib.FirstRun = true
-elseif Lib.FirstRun == true then
-    Lib.FirstRun = false
+if BetterLib.FirstRun == nil then
+    BetterLib.FirstRun = true
+elseif BetterLib.FirstRun == true then
+    BetterLib.FirstRun = false
 end
 
-if Lib.FirstRun then
+if BetterLib.FirstRun then
     --// Better Loadstring
-    function Lib.loadstring(string)
+    function BetterLib.loadstring(string)
         assert(type(string) == "string", "[Error] loadstring: First Argument needs to be a string!")
 
-        if Lib.LoadstringCaching[string] == nil then
-            Lib.LoadstringCaching[string] = Lib.OldLoadstring(string)
+        if BetterLib.LoadstringCaching[string] == nil then
+            BetterLib.LoadstringCaching[string] = BetterLib.OldLoadstring(string)
         else
-            return Lib.LoadstringCaching[string]
+            return BetterLib.LoadstringCaching[string]
         end
     end
-    _G.loadstring = Lib.loadstring
+    _G.loadstring = BetterLib.loadstring
 
     --// Better Get
-    function Lib.Get(url: string): any
+    function BetterLib.Get(url: string): any
         assert(type(string) == "string", "[Error] Get: First Argument needs to be a string!")
 
-        if Lib.GetCaching[string] == nil then
+        if BetterLib.GetCaching[string] == nil then
             local success, result = pcall(function()
                 return request and request({
                     Url = url;
@@ -42,17 +42,17 @@ if Lib.FirstRun then
             end)
 
             if success then
-                Lib.GetCaching[string] = result
+                BetterLib.GetCaching[string] = result
                 return result
             else
                 error("[Error] httpGet: Failed to get content from URL: " .. url .. "\n" .. tostring(result))
             end
         else
-            return Lib.GetCaching[string]
+            return BetterLib.GetCaching[string]
         end
         return nil
     end
-    _G.Get = Lib.Get
+    _G.Get = BetterLib.Get
 
     local reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
     local repr = loadstring(Get(reprUrl))()
@@ -72,4 +72,4 @@ if Lib.FirstRun then
     -- Example usage: local str = repr(table, reprSettings)
 end
 
-return Lib
+return BetterLib
