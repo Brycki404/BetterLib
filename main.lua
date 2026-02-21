@@ -57,7 +57,13 @@ if BetterLib.FirstRun then
     Get = BetterLib.Get
 
     BetterLib.reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
+    reprUrl = BetterLib.reprUrl
+    _G.reprUrl = reprUrl
+    
     BetterLin.repr = loadstring(BetterLib.Get(reprUrl))()
+    repr = BetterLib.repr
+    _G.repr = repr
+    
     BetterLib.reprSettings = {
     	pretty = false;              -- print with \n and indentation?
     	semicolons = false;          -- when printing tables, use semicolons (;) instead of commas (,)?
@@ -68,11 +74,7 @@ if BetterLib.FirstRun then
     	robloxProperFullName = true; -- when printing Roblox objects, print a proper* full name?
     	robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
     }
-    reprUrl = BetterLib.reprUrl
-    repr = BetterLib.repr
     reprSettings = BetterLib.reprSettings
-    _G.reprUrl = reprUrl
-    _G.repr = repr
     _G.reprSettings = reprSettings
     -- Example usage: local str = repr(table, reprSettings)
 end
