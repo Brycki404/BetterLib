@@ -27,8 +27,8 @@ if BetterLib.FirstRun then
             return BetterLib.LoadstringCaching[string]
         end
     end
-    _G.loadstring = BetterLib.loadstring
     loadstring = BetterLib.loadstring
+    _G.loadstring = BetterLib.loadstring
 
     --// Better Get
     function BetterLib.Get(url: string): any
@@ -53,16 +53,16 @@ if BetterLib.FirstRun then
         end
         return nil
     end
-    _G.Get = BetterLib.Get
     Get = BetterLib.Get
+    _G.Get = BetterLib.Get
 
     BetterLib.reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
     reprUrl = BetterLib.reprUrl
-    _G.reprUrl = reprUrl
+    _G.reprUrl = BetterLib.reprUrl
     
-    BetterLin.repr = loadstring(BetterLib.Get(reprUrl))()
+    BetterLin.repr = loadstring(BetterLib.Get(BetterLib.reprUrl))()
     repr = BetterLib.repr
-    _G.repr = repr
+    _G.repr = BetterLib.repr
     
     BetterLib.reprSettings = {
     	pretty = false;              -- print with \n and indentation?
@@ -75,7 +75,7 @@ if BetterLib.FirstRun then
     	robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
     }
     reprSettings = BetterLib.reprSettings
-    _G.reprSettings = reprSettings
+    _G.reprSettings = BetterLib.reprSettings
     -- Example usage: local str = repr(table, reprSettings)
 end
 
