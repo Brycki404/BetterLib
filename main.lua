@@ -55,7 +55,7 @@ if BetterLib.FirstRun then
     _G.Get = BetterLib.Get
 
     local reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
-    local repr = loadstring(Get(reprUrl))()
+    local repr = loadstring(BetterLib.Get(reprUrl))()
     local reprSettings = {
     	pretty = false;              -- print with \n and indentation?
     	semicolons = false;          -- when printing tables, use semicolons (;) instead of commas (,)?
