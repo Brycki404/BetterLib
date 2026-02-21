@@ -39,7 +39,7 @@ if BetterLib.FirstRun then
                 return request and request({
                     Url = url;
                     Method = "GET";
-                }) or game.HttpGet and game:HttpGet(url) or game.HttpGetAsync and game:HttpGetAsync(url) or nil
+                }) or game.HttpGet and game:HttpGet(url, true) or game.HttpGetAsync and game:HttpGetAsync(url, true) or nil
             end)
 
             if success then
