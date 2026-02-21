@@ -7,7 +7,7 @@ if _G.BetterLib == nil then
         OldLoadstring = loadstring;
     }
 end
-local BetterLib = _G.BetterLib
+BetterLib = _G.BetterLib
 
 --// First Run
 if BetterLib.FirstRun == nil then
@@ -22,7 +22,9 @@ if BetterLib.FirstRun then
         assert(type(str) == "string", "[Error] loadstring: First Argument needs to be a string!")
 
         if BetterLib.LoadstringCaching[str] == nil then
-            BetterLib.LoadstringCaching[str] = BetterLib.OldLoadstring(str)
+            local toCache = BetterLib.OldLoadstring(str)
+            BetterLib.LoadstringCaching[str] = toCache
+            return toCache
         end
         return BetterLib.LoadstringCaching[str]
     end
@@ -35,10 +37,7 @@ if BetterLib.FirstRun then
 
         if BetterLib.GetCaching[url] == nil then
             local success, result = pcall(function()
-                return request and request({
-                    Url = url;
-                    Method = "GET";
-                }) or game.HttpGet and game:HttpGet(url, true) or game.HttpGetAsync and game:HttpGetAsync(url, true) or nil
+                return game.HttpGet and game:HttpGet(url, true) or game.HttpGetAsync and game:HttpGetAsync(url, true) or nil
             end)
 
             if success then
@@ -77,3 +76,5 @@ if BetterLib.FirstRun then
     _G.reprSettings = BetterLib.reprSettings
     -- Example usage: local str = repr(table, reprSettings)
 end
+
+return BetterLib
