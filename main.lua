@@ -7,7 +7,7 @@ if _G.BetterLib == nil then
         OldLoadstring = loadstring;
     }
 end
-local BetterLib = _G.BetterLib
+BetterLib = _G.BetterLib
 
 --// First Run
 if BetterLib.FirstRun == nil then
