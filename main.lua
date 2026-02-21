@@ -28,6 +28,7 @@ if BetterLib.FirstRun then
         end
     end
     _G.loadstring = BetterLib.loadstring
+    loadstring = BetterLib.loadstring
 
     --// Better Get
     function BetterLib.Get(url: string): any
@@ -53,10 +54,11 @@ if BetterLib.FirstRun then
         return nil
     end
     _G.Get = BetterLib.Get
+    Get = BetterLib.Get
 
-    local reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
-    local repr = loadstring(BetterLib.Get(reprUrl))()
-    local reprSettings = {
+    BetterLib.reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
+    BetterLin.repr = loadstring(BetterLib.Get(reprUrl))()
+    BetterLib.reprSettings = {
     	pretty = false;              -- print with \n and indentation?
     	semicolons = false;          -- when printing tables, use semicolons (;) instead of commas (,)?
     	sortKeys = true;             -- when printing dictionary tables, sort keys alphabetically?
@@ -66,6 +68,9 @@ if BetterLib.FirstRun then
     	robloxProperFullName = true; -- when printing Roblox objects, print a proper* full name?
     	robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
     }
+    reprUrl = BetterLib.reprUrl
+    repr = BetterLib.repr
+    reprSettings = BetterLib.reprSettings
     _G.reprUrl = reprUrl
     _G.repr = repr
     _G.reprSettings = reprSettings
