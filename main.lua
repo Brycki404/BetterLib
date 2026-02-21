@@ -60,7 +60,7 @@ if BetterLib.FirstRun then
     reprUrl = BetterLib.reprUrl
     _G.reprUrl = BetterLib.reprUrl
     
-    BetterLin.repr = loadstring(BetterLib.Get(BetterLib.reprUrl))()
+    BetterLin.repr = BetterLib.loadstring(BetterLib.Get(BetterLib.reprUrl))()
     repr = BetterLib.repr
     _G.repr = BetterLib.repr
     
