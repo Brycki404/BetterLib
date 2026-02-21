@@ -7,7 +7,7 @@ if _G.BetterLib == nil then
         OldLoadstring = loadstring;
     }
 end
-BetterLib = _G.BetterLib
+local BetterLib = _G.BetterLib
 
 --// First Run
 if BetterLib.FirstRun == nil then
@@ -18,24 +18,22 @@ end
 
 if BetterLib.FirstRun then
     --// Better Loadstring
-    function BetterLib.loadstring(string)
-        assert(type(string) == "string", "[Error] loadstring: First Argument needs to be a string!")
+    function BetterLib.loadstring(str: string): any
+        assert(type(str) == "string", "[Error] loadstring: First Argument needs to be a string!")
 
-        if BetterLib.LoadstringCaching[string] == nil then
-            BetterLib.LoadstringCaching[string] = BetterLib.OldLoadstring(string)
-        else
-            return BetterLib.LoadstringCaching[string]
+        if BetterLib.LoadstringCaching[str] == nil then
+            BetterLib.LoadstringCaching[str] = BetterLib.OldLoadstring(str)
         end
+        return BetterLib.LoadstringCaching[str]
     end
     loadstring = BetterLib.loadstring
     _G.loadstring = BetterLib.loadstring
 
     --// Better Get
-    function BetterLib.Get(url)
-        print(url, type(url), typeof(url))
-        assert(type(string) == "string", "[Error] Get: First Argument needs to be a string!")
+    function BetterLib.Get(url: string): any
+        assert(type(url) == "string", "[Error] Get: First Argument needs to be a string!")
 
-        if BetterLib.GetCaching[string] == nil then
+        if BetterLib.GetCaching[url] == nil then
             local success, result = pcall(function()
                 return request and request({
                     Url = url;
@@ -44,13 +42,13 @@ if BetterLib.FirstRun then
             end)
 
             if success then
-                BetterLib.GetCaching[string] = result
+                BetterLib.GetCaching[url] = result
                 return result
             else
                 error("[Error] httpGet: Failed to get content from URL: " .. url .. "\n" .. tostring(result))
             end
         else
-            return BetterLib.GetCaching[string]
+            return BetterLib.GetCaching[url]
         end
         return nil
     end
@@ -66,18 +64,16 @@ if BetterLib.FirstRun then
     _G.repr = BetterLib.repr
     
     BetterLib.reprSettings = {
-    	pretty = false;              -- print with \n and indentation?
-    	semicolons = false;          -- when printing tables, use semicolons (;) instead of commas (,)?
-    	sortKeys = true;             -- when printing dictionary tables, sort keys alphabetically?
-    	spaces = 3;                  -- when pretty printing, use how many spaces to indent?
-    	tabs = false;                -- when pretty printing, use tabs instead of spaces?
-    	robloxFullName = false;      -- when printing Roblox objects, print full name or just name? 
-    	robloxProperFullName = true; -- when printing Roblox objects, print a proper* full name?
-    	robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
+        pretty = false;              -- print with \n and indentation?
+        semicolons = false;          -- when printing tables, use semicolons (;) instead of commas (,)?
+        sortKeys = true;             -- when printing dictionary tables, sort keys alphabetically?
+        spaces = 3;                  -- when pretty printing, use how many spaces to indent?
+        tabs = false;                -- when pretty printing, use tabs instead of spaces?
+        robloxFullName = false;      -- when printing Roblox objects, print full name or just name? 
+        robloxProperFullName = true; -- when printing Roblox objects, print a proper* full name?
+        robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
     }
     reprSettings = BetterLib.reprSettings
     _G.reprSettings = BetterLib.reprSettings
     -- Example usage: local str = repr(table, reprSettings)
 end
-
-return BetterLib
