@@ -71,3 +71,5 @@ if Lib.FirstRun then
     _G.reprSettings = reprSettings
     -- Example usage: local str = repr(table, reprSettings)
 end
+
+return Lib
