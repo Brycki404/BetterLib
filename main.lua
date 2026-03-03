@@ -87,14 +87,14 @@ if BetterLib.FirstRun then
     genv.repr = BetterLib.repr
     
     BetterLib.reprSettings = {
-        pretty = false;              -- print with \n and indentation?
-        semicolons = false;          -- when printing tables, use semicolons (;) instead of commas (,)?
-        sortKeys = true;             -- when printing dictionary tables, sort keys alphabetically?
-        spaces = 3;                  -- when pretty printing, use how many spaces to indent?
-        tabs = false;                -- when pretty printing, use tabs instead of spaces?
-        robloxFullName = false;      -- when printing Roblox objects, print full name or just name? 
-        robloxProperFullName = true; -- when printing Roblox objects, print a proper* full name?
-        robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
+        pretty = true;              -- print with \n and indentation?
+    	semicolons = true;          -- when printing tables, use semicolons (;) instead of commas (,)?
+    	sortKeys = true;             -- when printing dictionary tables, sort keys alphabetically?
+    	spaces = 2;                  -- when pretty printing, use how many spaces to indent?
+    	tabs = false;                -- when pretty printing, use tabs instead of spaces?
+    	robloxFullName = true;      -- when printing Roblox objects, print full name or just name? 
+    	robloxProperFullName = true; -- when printing Roblox objects, print a proper* full name?
+    	robloxClassName = true;      -- when printing Roblox objects, also print class name in parens?
     }
     reprSettings = BetterLib.reprSettings
     genv.reprSettings = BetterLib.reprSettings
