@@ -136,7 +136,7 @@ if BetterLib.FirstRun then
     	for key, value in pairs(t) do
     		value = rawget(t, key)
     		if type(value) == "table" then
-    			value = module.deepCopy(value)
+    			value = BetterLib.deepCopy(value)
     		end
     		t2[key] = value
     	end
