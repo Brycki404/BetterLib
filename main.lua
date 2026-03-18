@@ -107,6 +107,60 @@ if BetterLib.FirstRun then
     reprSettings = BetterLib.reprSettings
     genv.reprSettings = BetterLib.reprSettings
     -- Example usage: local str = repr(table, reprSettings)
+
+    --Check Executor Has Global Function
+    function genv.CEHGF(name: string): boolean
+        if genv[name] and type(genv[name]) == "function" then
+            return true
+        end
+        return false
+    end
+    
+    function genv.shallowCopy(t)
+    	local t2 = {}
+    	t.__index = nil
+    	for key, value in pairs(t) do
+    		value = rawget(t, key)
+    		t2[key] = value
+    	end
+    	return t2
+    end
+    
+    function genv.deepCopy(t)
+    	local t2 = {}
+    	t.__index = nil
+    	for key, value in pairs(t) do
+    		value = rawget(t, key)
+    		if type(value) == "table" then
+    			value = module.deepCopy(value)
+    		end
+    		t2[key] = value
+    	end
+    	return t2
+    end
+    
+    genv.EXECUTOR_FILING_FUNCTIONS = {
+        "readfile";
+        "listfiles";
+        "writefile";
+        "makefolder";
+        "appendfile";
+        "isfile";
+        "isfolder";
+        "delfile";
+        "delfolder";
+        "loadfile";
+        "dofile";
+    }
+    
+    genv.EXECUTOR_FILING_ENABLED = true
+    for i, name in ipairs(EXECUTOR_FILING_FUNCTIONS) do
+        if not CEHGF(name) then
+            EXECUTOR_FILING_ENABLED = false
+            warn("Executor does not support file functions. File saving/loading features will be disabled. Missing function: " .. name)
+            break
+        end
+    end
 end
 
 return BetterLib
