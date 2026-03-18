@@ -78,6 +78,14 @@ if BetterLib.FirstRun then
     saveinstance = BetterLib.saveinstance
     genv.saveinstance = BetterLib.saveinstance
 
+    BetterLib.ConfigLibraryUrl = "https://raw.githubusercontent.com/Brycki404/Config-Library/refs/heads/main/Main.lua"
+    ConfigLibraryUrl = BetterLib.ConfigLibraryUrl
+    genv.ConfigLibraryUrl = BetterLib.ConfigLibraryUrl
+
+    BetterLib.ConfigLibrary = BetterLib.loadstring(BetterLib.Get(BetterLib.ConfigLibraryUrl))()
+    ConfigLibrary = BetterLib.ConfigLibrary
+    genv.ConfigLibrary = BetterLib.ConfigLibrary
+
     BetterLib.reprUrl = "https://raw.githubusercontent.com/Ozzypig/repr/refs/heads/master/repr.lua"
     reprUrl = BetterLib.reprUrl
     genv.reprUrl = BetterLib.reprUrl
