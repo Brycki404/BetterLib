@@ -109,14 +109,16 @@ if BetterLib.FirstRun then
     -- Example usage: local str = repr(table, reprSettings)
 
     --Check Executor Has Global Function
-    function genv.CEHGF(name: string): boolean
+    BetterLib.CEHGF = function(name: string): boolean
         if genv[name] and type(genv[name]) == "function" then
             return true
         end
         return false
     end
+    CEHGF = BetterLib.CEHGF
+    genv.CEHGF = BetterLib.CEHGF
     
-    function genv.shallowCopy(t)
+    BetterLib.shallowCopy = function(t)
     	local t2 = {}
     	t.__index = nil
     	for key, value in pairs(t) do
@@ -125,8 +127,10 @@ if BetterLib.FirstRun then
     	end
     	return t2
     end
+    shallowCopy = BetterLib.shallowCopy
+    genv.shallowCopy = BetterLib.shallowCopy
     
-    function genv.deepCopy(t)
+    BetterLib.deepCopy = function(t)
     	local t2 = {}
     	t.__index = nil
     	for key, value in pairs(t) do
@@ -138,8 +142,10 @@ if BetterLib.FirstRun then
     	end
     	return t2
     end
+    deepCopy = BetterLib.deepCopy
+    genv.deepCopy = BetterLib.deepCopy
     
-    genv.EXECUTOR_FILING_FUNCTIONS = {
+    BetterLib.EXECUTOR_FILING_FUNCTIONS = {
         "readfile";
         "listfiles";
         "writefile";
@@ -152,11 +158,16 @@ if BetterLib.FirstRun then
         "loadfile";
         "dofile";
     }
+    EXECUTOR_FILING_FUNCTIONS = BetterLib.EXECUTOR_FILING_FUNCTIONS
+    genv.EXECUTOR_FILING_FUNCTIONS = BetterLib.EXECUTOR_FILING_FUNCTIONS
     
-    genv.EXECUTOR_FILING_ENABLED = true
-    for i, name in ipairs(EXECUTOR_FILING_FUNCTIONS) do
-        if not CEHGF(name) then
-            EXECUTOR_FILING_ENABLED = false
+    BetterLib.EXECUTOR_FILING_ENABLED = true
+    EXECUTOR_FILING_ENABLED = BetterLib.EXECUTOR_FILING_ENABLED
+    genv.EXECUTOR_FILING_ENABLED = BetterLib.EXECUTOR_FILING_ENABLED
+    
+    for i, name in ipairs(BetterLib.EXECUTOR_FILING_FUNCTIONS) do
+        if not BetterLib.CEHGF(name) then
+            BetterLib.EXECUTOR_FILING_ENABLED = false
             warn("Executor does not support file functions. File saving/loading features will be disabled. Missing function: " .. name)
             break
         end
